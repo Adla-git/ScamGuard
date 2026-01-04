@@ -1,10 +1,56 @@
-Overall process
+''' Overall process
 
-Create github repository > .gitignore | LICENSE | README.md
-Cloned the repo
-Updated README.md
-Created initial folder structure
-Create virtual environment
-Install dependencies
-Design overall workflow (in experimentations)
-Convert it into project files
+1. Create github repository > .gitignore | LICENSE | README.md
+2. Cloned the repo
+3. Updated README.md
+4. Created initial folder structure
+5. Create virtual environment
+6. Install dependencies
+7. Design overall workflow (in experimentations)
+8. Convert it into project files
+
+'''
+
+# 1. Setup and Config
+from google import genai
+from google.genai import types
+
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+# 2. create client
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+GEMINI_MODEL_NAME = "gemini-2.5-flash-lite"
+
+print("KSJHGFSKDJHFSD")
+
+# 3. create prompt template
+PROMPT_TEMPLATE = """
+You are a highly reliable and safety-focused AI system trained to identify potentially scammy messages.
+
+Follow this exact structured reasoning format:
+1. **Thought**: Analyze the tone, urgency, and patterns.
+2. **Action**: Classify if this is likely a scam.
+3. **Final Answer**: Output a structured JSON.
+
+Return ONLY the 'Final Answer' in this JSON format:
+```
+    {{
+    "label": "Scam | Not Scam | Uncertain",
+    "reasoning": "Your step-by-step analysis",
+    "intent": Sender's intent behind the message",
+    "risk_factors": ["List of red flags like urgency, bad links, etc."]
+    }}
+```
+User Message:
+{}
+"""
+
+# 4. handle input
+user_input = input("Enter the text message to analyze: ")
+print(user_input)
+
+# 5. generate response with llm
+
+# 6. handle output
