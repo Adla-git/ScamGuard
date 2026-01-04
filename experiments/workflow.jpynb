@@ -1,0 +1,10 @@
+Overall process
+
+Create github repository > .gitignore | LICENSE | README.md
+Cloned the repo
+Updated README.md
+Created initial folder structure
+Create virtual environment
+Install dependencies
+Design overall workflow (in experimentations)
+Convert it into project files
