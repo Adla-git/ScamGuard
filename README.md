@@ -14,7 +14,7 @@ LLM Used: gemini-2.5-flash-lite
 
 - Activate virtual environment
 
-    - source /Users/adl/Downloads/python/ScamGuard/scamguard/bin/activate
+    - source /Users/xxxxxx/xxxxxx/python/ScamGuard/scamguard/bin/activate
 
 - Install dependencies
 

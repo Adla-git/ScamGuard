@@ -37,7 +37,8 @@ class LLMClient:
                     raise Exception("Empty response received")
             
             except Exception as e:
-                if attempt == self.max_retries:
+                if attempt == self.max_retries - 1:
                     raise Exception(f"API call failed after {attempt + 1} attempts: {str(e)}")
                 
                 time.sleep(self.retry_delay * (2**attempt))
+                logger.warning(f"Attempt {attempt + 1} failed, retrying...")

@@ -1,28 +1,27 @@
 from pathlib import Path
 from utils import load_file
 
+PROMPTS_DIR = Path(__file__).parent / "prompt"
 
-PROMPTS_DIR = Path(__file__).parent / "prompts"
 def load_prompt(filename: str) -> str:
     """
-    Docstring for load_prompt
-    
-    :param filename: Description
-    :type filename: str
-    :return: Description
-    :rtype: str
+    Load prompt template from file.
     """
     return load_file(PROMPTS_DIR / filename)
 
-PROMPT = load_prompt("react.md")
-def generate_prompt(user_input: str) -> str:
+# Load all available prompts
+PROMPTS = {
+    "react": load_prompt("react.md"),
+    "simple": load_prompt("simple.md"),
+    "detailed": load_prompt("detailed.md")
+}
+
+def generate_prompt(user_input: str, strategy: str = "react") -> str:
     """
-    Docstring for generate_prompt
+    Generate prompt based on strategy.
+    """
+    if strategy not in PROMPTS:
+        raise ValueError(f"Unknown strategy: {strategy}. Available: {list(PROMPTS.keys())}")
     
-    :param user_input: Description
-    :type user_input: str
-    :return: Description
-    :rtype: str
-    """
-    template = PROMPT
+    template = PROMPTS[strategy]
     return f"{template}\n\nUser Message:\n{user_input.strip()}"

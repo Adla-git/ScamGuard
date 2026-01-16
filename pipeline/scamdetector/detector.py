@@ -38,3 +38,24 @@ class ScamDetector:
 
         except Exception as e:
             logger.error(f"Detection pipeline failed: {e}")
+            return {
+                "label": "Error",
+                "reasoning": f"Pipeline failed: {str(e)}",
+                "intent": "Unknown",
+                "risk_factors": ["System Error"]
+            }
+    
+    def detect_batch(self, messages: List[str]) -> List[Dict[str, Any]]:
+        """
+        Process multiple messages in batch.
+        """
+        logger.info(f"Started batch detection for {len(messages)} messages")
+        results = []
+        
+        for i, message in enumerate(messages):
+            logger.info(f"Processing message {i+1}/{len(messages)}")
+            result = self.detect(message)
+            results.append(result)
+        
+        logger.info(f"Batch detection completed")
+        return results
